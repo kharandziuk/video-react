@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './scss/style.scss';
+import { Container, Row, Col } from 'reactstrap';
 
 const options = {
   fps: 30,
@@ -9,11 +9,18 @@ const options = {
   mirror: true,
 }
 
+const elements = new Array(5).fill(0);
+
 function initCanvas() {
   const canvas = document.createElement("canvas");
-  document.body.appendChild(canvas)
+  // document.body.appendChild(canvas)
+  let videos = document.querySelectorAll('.video');
+  for (let video of videos) {
+    video.appendChild(canvas)
+  }
   canvas.setAttribute('width', options.width);
   canvas.setAttribute('height', options.height);
+  canvas.classList.add('embed-responsive-item')
 
   const context = canvas.getContext('2d');
 
@@ -78,17 +85,26 @@ function App() {
   )
 
   return (
-      <>
-      <h1 id="info">Please allow this page to access your camera.</h1>
-
-      <div id="notSupported">
-      <h1>Your browser does not support the Camera API.</h1>
-      <img src="images/screenshot.png" align="center" />
-      </div>
-
-      <pre id="ascii"></pre>
-      </>
-  );
+    <>
+      <header className="py-3">
+        <Container className="d-flex">
+          <span>BlaBlaBar</span>
+        </Container>
+      </header>
+      <Container>
+        <Row className="justify-content-center">
+          {elements.map( (_, i) => (
+            <Col md="6" lg="4" key={i}>
+              <div id={i+1} className="embed-responsive embed-responsive-4by3 p-3 bg-light video mb-3 rounded" />
+            </Col>
+          ))}
+        </Row>
+        <div id="notSupported" className="d-none">
+          <h1>Your browser does not support the Camera API.</h1>
+        </div>
+      </Container>
+    </>
+);
 }
 
 export default App;
