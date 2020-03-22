@@ -13,11 +13,8 @@ const elements = new Array(5).fill(0);
 
 function initCanvas() {
   const canvas = document.createElement("canvas");
-  // document.body.appendChild(canvas)
-  let videos = document.querySelectorAll('.video');
-  for (let video of videos) {
-    video.appendChild(canvas)
-  }
+  let video = document.querySelector('.video');
+  video.appendChild(canvas)
   canvas.setAttribute('width', options.width);
   canvas.setAttribute('height', options.height);
   canvas.classList.add('embed-responsive-item')
@@ -95,7 +92,7 @@ function App() {
         <Row className="justify-content-center">
           {elements.map( (_, i) => (
             <Col md="6" lg="4" key={i}>
-              <div id={i+1} className="embed-responsive embed-responsive-4by3 p-3 bg-light video mb-3 rounded" />
+              <div id={i+1} className="embed-responsive embed-responsive-4by3 p-3 bg-dark video mb-3 rounded" />
             </Col>
           ))}
         </Row>
